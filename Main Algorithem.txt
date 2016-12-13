@@ -1,0 +1,6 @@
+Main Algorithem
+
+start by placing on every n a hole (n must be a number that divides the memory length)
+a hole is a code that creates more hole at n/2 intervals between every two holes (and recursivly continue)
+
+after the main holes have been placed we can move to bombing them.
