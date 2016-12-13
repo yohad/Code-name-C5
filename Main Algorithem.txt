@@ -4,3 +4,10 @@ start by placing on every n a hole (n must be a number that divides the memory l
 a hole is a code that creates more hole at n/2 intervals between every two holes (and recursivly continue)
 
 after the main holes have been placed we can move to bombing them.
+
+TODO:
+- Figure out how the holes should look like and how can we copy them.
+- How the bombing should be.
+- What defensive techniques are we going to use?
+
+add more if you think it is nesccecery
