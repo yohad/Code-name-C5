@@ -11,12 +11,12 @@ start:
 	add di, (exit - start)
 	mov ax, 20h
 
-	mov byte ptr es:[TRAP_SRC], 0BBh
-	mov word ptr es:[TRAP_SRC + 1], 0000h	; Placeholder. Each time the trap is placed this value needs to be changed to the current trap's IP.
-	mov word ptr es:[TRAP_SRC + 3], 81C3h
-	mov word ptr es:[TRAP_SRC + 5], 8000h
-	mov word ptr es:[TRAP_SRC + 7], 0C607h
-	mov word ptr es:[TRAP_SRC + 9], 0CCCCh
+	mov [byte ptr es:TRAP_SRC], 0BBh
+	mov [word ptr es:TRAP_SRC + 1], 0000h	; Placeholder. Each time the trap is placed this value needs to be changed to the current trap's IP.
+	mov [word ptr es:TRAP_SRC + 3], 81C3h
+	mov [word ptr es:TRAP_SRC + 5], 8000h
+	mov [word ptr es:TRAP_SRC + 7], 0C607h
+	mov [word ptr es:TRAP_SRC + 9], 0CCCCh
 
 	;;;TRAP;;;
 	;mov bx, {IP of trap}
