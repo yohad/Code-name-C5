@@ -7,6 +7,12 @@ start:
 	add bx, (exit - start)
 	mov ax, 20h
 trap:
+		;;;TRAP;;;
+		;mov bx, {IP of trap}
+		;add bx, 8000
+		;mov byte ptr [bx], 0CCh
+		;int 3
+		;;;END;;;
 	add bx, ax
 		;mov bx, {location of trap start}
 	mov [byte bx], 0BBh
