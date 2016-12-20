@@ -33,7 +33,7 @@ start:
 trap:
 	xor si, si	; Prepares to move the trap contents from ds:[0 -> 10] to es:[di -> di+10]
 	add di, ax
-	mov word ptr ds:[1], di
+	mov ds:[1], di
 	;mov bx, {location of trap start}
 	; Updates the trap code to use the current trap's starting address.
 	
