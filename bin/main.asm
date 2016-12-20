@@ -25,11 +25,10 @@ start:
 	;int 3
 	;;;END;;;
 
-	mov bx, ds
-	mov cx, es
-	mov ds, cx
-	mov es, bx	; Swap ds and es for strcpy to operate from private memory to public memory.
-
+	push ds
+	push es
+	pop ds
+	pop es	; DS and ES must be swapped for movs to copy private memory to public memory.
 trap:
 	xor si, si	; Prepares to move the trap contents from ds:[0 -> 10] to es:[di -> di+10]
 	add di, ax
