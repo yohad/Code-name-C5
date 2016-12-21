@@ -35,6 +35,7 @@ trap:
 
 	movsb
 	stosw
+	add si, 2
 	mov cx, TRAP_SIZE-3
 	rep movsb
 	sub di, TRAP_SIZE
