@@ -1,4 +1,4 @@
-DEAL
+IDEAL
 model tiny
 CODESEG
 org 100h
@@ -14,7 +14,7 @@ start:
 	
 	mov di, ax
 	add di, (exit - start)
-	mov dx, 3Fh
+	mov dx, 19h
 	
 	;;;TRAP;;;
 	;mov bx, {IP of trap}
@@ -40,13 +40,16 @@ trap:
 
 	mov cx, TRAP_SIZE
 	rep movsb
+	sub di, TRAP_SIZE
 	
 	push ds
 	push es
 	pop ds
 	pop es
 
-	add dx, dx
+	mov ax, dx
+	add ax, ax
+	add dx, ax
 	neg dx
 
 	jmp trap
