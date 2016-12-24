@@ -3,6 +3,8 @@ model tiny
 CODESEG
 org 100h
 
+INTERVAL equ 4
+
 start:
 	mov di, ax
 	mov bx, ax
@@ -27,6 +29,7 @@ fangtoss:
 	mov cx, (pit - fang)
 	rep movsb
 	sub si, (pit - fang)
+	add di, INTERVAL
 	jmp fangtoss
 	
 padding:		; TODO add padding.
