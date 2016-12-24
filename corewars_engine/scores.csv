@@ -1,7 +1,20 @@
 Groups:
-FIRST,0.0
-FIRST - Copy,0.0
+bimp,4.0
+FIRSTTRY,2.0
+main,0.0
+shooterA,28.0
+shooterB,16.0
+shooterC,11.0
+ZOMBIE,29.0
 
 Warriors:
-FIRST,0.0
-FIRST - Copy,0.0
+bimp1,0.5
+bimp2,3.5
+FIRSTTRY,2.0
+main1,0.0
+main2,0.0
+shooterA1,10.0
+shooterA2,18.0
+shooterB,16.0
+shooterC,11.0
+ZOMBIE,29.0
