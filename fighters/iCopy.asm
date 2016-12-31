@@ -6,12 +6,12 @@ _start:
     push    ax
     mov     si, ax
 
-    mov     cx, 0x400 - (_exit - _trap)
+    mov     cx, (0x400 - (_exit - _trap)) / 2
     mov     ax, 0x9090
     rep     stosw
 
     add     si, (_trap - _start)
-    mov     cx, (_exit - _trap)
+    mov     cx, (_exit - _trap) / 2
     rep     movsw
 
     push    es
@@ -26,6 +26,7 @@ _start:
 
 _trap:
 
+    nop
     std
     mov     ax, 0x9090
     mov     cx, 0x200
@@ -35,11 +36,9 @@ _trap:
 _main:
 
     xor     si, si
-    mov     cx, 0x400
+    mov     cx, 0x200
     rep     movsw
-    add     di, 0x400
-    db      0xE9
-    db      0xFD
-    db      0x03
+    ; add     di, 0x400
+    jmp     _main + 0x400
 
 _exit:
