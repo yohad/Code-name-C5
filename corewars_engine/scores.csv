@@ -1,9 +1,12 @@
 Groups:
 iCopy,0.0
-jmper,100.0
+jmper,0.0
+LoudBugFix,100.0
 
 Warriors:
 iCopy1,0.0
 iCopy2,0.0
-jmper1,50.0
-jmper2,50.0
+jmper1,0.0
+jmper2,0.0
+LoudBugFix1,100.0
+LoudBugFix2,0.0
