@@ -28,6 +28,10 @@ _trap:
 
     nop
     std
+    push    es
+    push    ds
+    pop     es
+    pop     ds
     mov     ax, 0x9090
     mov     cx, 0x200
     rep     stosw
