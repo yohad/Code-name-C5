@@ -1,6 +1,8 @@
 section _text
 global start
 
+JMPLEN equ 0x83
+
 start:
 
 	mov 	si, ax					;mov si, the location of the code
@@ -18,15 +20,16 @@ start:
 	add 	di, (imp - start)		;di points to imp
 
 imp:
-
+	
+	nop 							;This nop operation makes copying easier
 	xor		si, si					;point si to the start of the imp code in private memory
-	add 	di, 0x203				;di is pointing at the next point
+	add 	di, JMPLEN				;di is pointing at the next point
 	mov 	cx, (exit - imp) / 2	;number of times to copy word data
 	rep 	movsw					;dump new imp to it's new location
 	sub 	di, (exit - imp)		;make di point to imp again (from exit)
 
 	cmp 	dx, 0xDEAD				;check dx for authentication
-	jz		imp	+ 0x203				;jmp to the new imp
+	jz		imp	+ JMPLEN			;jmp to the new imp
 	int 	0x3						;kill the non authenticate survivor
 
 exit:
