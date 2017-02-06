@@ -18,6 +18,7 @@ start:
 	xor 	si, si
 	mov 	cx, 0xCCCC
 	movsw
+	movsb
 
 imp:
 
@@ -26,8 +27,8 @@ imp:
 	movsw
 	mov  	word [di+0x70], cx    	;Bomb location
 	movsw
-	movsw
 	xor 	si, si					;make si point to begining of private location
 	movsw
+	movsb
 
 exit:
