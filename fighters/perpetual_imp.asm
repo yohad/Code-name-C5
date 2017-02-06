@@ -1,6 +1,8 @@
 section _text
 global start
 
+JUMP_INTERVAL equ 8
+
 start:
 
 	mov 	si, ax					;mov si, the location of the code
@@ -19,6 +21,7 @@ start:
 	mov 	cx, 0xCCCC
 	mov dx, es ; ax points to code/data segment
 	mov bx, ds ; bx points to private memory
+	mov ax, JUMP_INTERVAL
 	movsw
 	movsw
 
@@ -32,8 +35,18 @@ imp:
 	mov  	word [di+0x70], cx    	;Bomb location
 	mov ds, bx
 	movsw
+
 	movsw
 	movsw
+	movsw
+	add di, ax
+	movsb
+	db 0xEB, JUMP_INTERVAL
+
+	movsw
+	movsw
+	movsw
+
 	xor 	si, si					;make si point to begining of private location
 	movsw
 	movsw
