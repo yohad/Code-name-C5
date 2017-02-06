@@ -1,7 +1,6 @@
 section _text
 global start
-
-JUMP_INTERVAL equ 8
+JUMP_INTERVAL equ 20
 
 start:
 
