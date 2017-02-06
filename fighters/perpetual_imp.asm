@@ -17,18 +17,25 @@ start:
 	add 	di, (imp - start)		;di points to imp
 	xor 	si, si
 	mov 	cx, 0xCCCC
+	mov dx, es ; ax points to code/data segment
+	mov bx, ds ; bx points to private memory
 	movsw
-	movsb
+	movsw
 
 imp:
 
 	movsw
 	movsw
 	movsw
+	movsw
+	mov ds, dx
 	mov  	word [di+0x70], cx    	;Bomb location
+	mov ds, bx
+	movsw
+	movsw
 	movsw
 	xor 	si, si					;make si point to begining of private location
 	movsw
-	movsb
+	movsw
 
 exit:
