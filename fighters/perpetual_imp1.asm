@@ -1,6 +1,6 @@
 section _text
 global start
-JUMP_INTERVAL equ 20
+LENGTH_CHECK 	equ 0x50
 
 start:
 
@@ -18,36 +18,52 @@ start:
 	add 	di, (imp - start)		;di points to imp
 	xor 	si, si
 	mov 	cx, 0xCCCC
-	mov dx, es ; ax points to code/data segment
-	mov bx, ds ; bx points to private memory
-	mov ax, JUMP_INTERVAL
-	movsw
-	movsw
+	mov 	dx, es 					; dx points to code/data segment
+	mov 	bx, ds 					; bx points to private memory
+	mov 	bp, 0x10
 
+	movsw
 imp:
+	movsw
+	movsw
+	movsw
+	movsw
+	movsw
+	movsw
+	mov 	ds, dx
+	mov 	ax, [di+LENGTH_CHECK]
+	mov 	ds,bx
 
 	movsw
 	movsw
-	movsw
-	movsw
-	mov ds, dx
-	mov  	word [di+0x70], cx    	;Bomb location
-	mov ds, bx
-	movsw
+	not 	ax
 
 	movsw
 	movsw
+	and 	ax, bp
+
 	movsw
-	add di, ax
+	movsw
+	add 	si, ax
+
+	movsw							; post-comparison load
+
+bomb:
+	movsw
+	movsw
+	movsw
+	movsw
+	movsw
+	movsw
+	mov 	ds, dx
+	mov 	[di + LENGTH_CHECK+6], cx		; bomb
+	mov 	ds, bx
+
 	movsb
-	db 0xEB, JUMP_INTERVAL
-
+	movsb
 	movsw
+postbomb:
 	movsw
+	xor 	si, si
 	movsw
-
-	xor 	si, si					;make si point to begining of private location
-	movsw
-	movsw
-
 exit:
