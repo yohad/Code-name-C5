@@ -1,6 +1,6 @@
 section _text
 global start
-LENGTH_CHECK 	equ 0x50
+LENGTH_CHECK 	equ 0x70
 
 start:
 	push ss

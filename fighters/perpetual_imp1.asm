@@ -1,9 +1,10 @@
 section _text
 global start
-LENGTH_CHECK 	equ 0x50
+LENGTH_CHECK 	equ 0x70
+SCAN_LENGTH		equ 2*(exit-start)
 
 start:
-
+	jmp 	ax
 	mov 	si, ax					;mov si, the location of the code
 	add 	si, (imp - start)		;make si point to the start of the imp
 	mov 	cx, (exit - imp)    	;put in cx number for rep (divided by 2 for word action)
@@ -48,22 +49,36 @@ imp:
 
 	movsw							; post-comparison load
 
-bomb:
-	movsw
-	movsw
-	movsw
-	movsw
-	movsw
-	movsw
-	mov 	ds, dx
-	mov 	[di + LENGTH_CHECK+6], cx		; bomb
-	mov 	ds, bx
+scan:
 
-	movsb
-	movsb
 	movsw
-postbomb:
+	mov 	al, 0xA5
+
 	movsw
+	movsw
+	repne 	scasb
+
+	push 	cx
+	neg		cx
+	shl 	cx, 1
+	xor 	ax, ax
+	adc		ax
+	shl 	ax, 4
+	add 	si, ax
+
 	xor 	si, si
 	movsw
+
+	pop 	cx
+	add 	cx, di
+	add 	cx, {offset}
+
+	xor 	si, si
+	jmp cx
+
+; 	movsw
+; post_scan:
+; 	movsw
+; 	xor 	si, si
+; 	movsw
 exit:
