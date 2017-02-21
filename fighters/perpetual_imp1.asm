@@ -1,6 +1,6 @@
 section _text
 global start
-LENGTH_CHECK 	equ 0x70
+LENGTH_CHECK 	equ 0x50
 SCAN_LENGTH		equ 0x79
 SCANBRANCH_LENGTH 	equ 128
 
@@ -46,7 +46,9 @@ imp:
 	movsw
 	movsw
 	movsw
-	shl ax, 3
+	movsw
+	mov ah, 8
+	mul ah
 
 	movsw
 	movsw
@@ -62,6 +64,11 @@ scan:
 	movsw
 	movsw
 	movsw
+	mov cx, SCAN_LENGTH
+
+	movsw
+	movsw
+	movsw
 	movsw
 	movsw
 	movsw
@@ -70,8 +77,8 @@ scan:
 	push 	si
 	push 	di
 	repne 	scasb
-	pop 	si
 	pop 	di
+	pop 	si
 
 	movsw
 	push 	cx
@@ -82,11 +89,11 @@ scan:
 
 	movsw
 	movsw
-	shl 	cx, 1
+	xor 	ax, ax
 
 	movsw
 	movsw
-	xor 	ax, ax
+	shl 	cx, 1
 
 	movsw
 	movsw
@@ -94,7 +101,10 @@ scan:
 
 	movsw
 	movsw
-	xchg	al, ah
+	movsw
+	movsw
+	mov 	ah, 0x10
+	mul		ah
 
 	movsw
 	movsw
@@ -111,6 +121,13 @@ no_movsw_found:
 	movsw
 	xor 	si, si
 	movsw
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 
 movsw_found:
 	movsw
@@ -125,8 +142,8 @@ movsw_found:
 	movsw
 	movsw
 	movsw
+	movsw
 	add		cx, SCAN_LENGTH-1
-
 	movsw
 	movsw
 	add 	cx, ax
